@@ -16,11 +16,22 @@ Install the required libraries ([Flask](https://flask.palletsprojects.com/en/mas
 pip3 install -r requirements.txt --user
 ```
 
-In case you don't have `pip3` installed, run the following command:
+In case you don't have `pip3` installed, run the following commands and re-run the previous command:
 
 ```
+sudo apt update
 sudo apt install python3-pip
 ```
+
+Test that your setup is working:
+
+```
+python3
+>>> import requests
+>>> import flask
+```
+
+If you get no errors, everything's fine!
 
 ## Exercises
 

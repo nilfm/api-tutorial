@@ -1,7 +1,7 @@
 import requests
 from pprint import pprint
 
-TOKEN = "###" # TODO: Modify this
+TOKEN = "33655c93c2msh4578a20b4f74438p123895jsnf551913e72b9"
 
 
 # Get all available languages
@@ -33,29 +33,39 @@ headers = {
  }
 
 response = requests.post(URL_DETECT, data=payload, headers=headers)
+print(response.url)
 resp = response.json()
 language = resp["data"]["detections"][0][0]["language"]
 confidence = resp["data"]["detections"][0][0]["confidence"]
 print(f"Language {language} with confidence {confidence}")
 
 
-# Translate text between two languages
-URL_TRANSLATE = "https://google-translate1.p.rapidapi.com/language/translate/v2"
+def translate(text, source, target):
+    # Translate text between two languages
+    URL_TRANSLATE = "https://google-translate1.p.rapidapi.com/language/translate/v2"
 
-payload = {
-    "q": "Hello world!",
-    "source": "en",
-    "target": "es",
-}
-headers = {
-    'content-type': "application/x-www-form-urlencoded",
-    'accept-encoding': "application/gzip",
-    'x-rapidapi-key': TOKEN,
-    'x-rapidapi-host': "google-translate1.p.rapidapi.com"
-}
+    payload = {
+        "q": text,
+        "source": source,
+        "target": target,
+    }
+    headers = {
+        'content-type': "application/x-www-form-urlencoded",
+        'accept-encoding': "application/gzip",
+        'x-rapidapi-key': TOKEN,
+        'x-rapidapi-host': "google-translate1.p.rapidapi.com"
+    }
 
-response = requests.post(URL_TRANSLATE, data=payload, headers=headers)
-resp = response.json()
-translated = resp["data"]["translations"][0]["translatedText"]
-print(f"Original text in {payload['source']}: {payload['q']}")
-print(f"Translated text in {payload['target']}: {translated}")
+    response = requests.post(URL_TRANSLATE, data=payload, headers=headers)
+    resp = response.json()
+    translated = resp["data"]["translations"][0]["translatedText"]
+    print(f"Original text in {payload['source']}: {payload['q']}")
+    print(f"Translated text in {payload['target']}: {translated}")
+    return translated
+
+print("\n\nTranslation")
+while True:
+    text = input("Text to translate: ")
+    source = input("Source language: ")
+    target = input("Target language: ")
+    translate(text, source, target)
