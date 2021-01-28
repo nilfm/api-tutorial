@@ -1,7 +1,7 @@
 import requests
 from pprint import pprint
 
-TOKEN = "33655c93c2msh4578a20b4f74438p123895jsnf551913e72b9"
+TOKEN = "###" # Insert token here
 
 
 URL = "https://community-open-weather-map.p.rapidapi.com/weather"
